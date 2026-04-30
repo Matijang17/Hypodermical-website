@@ -221,6 +221,7 @@ ul { list-style: none; }
   position: relative;
   overflow: hidden;
 }
+
 .section-results .container {
   max-width: var(--max-width);
   margin: 0 auto;
