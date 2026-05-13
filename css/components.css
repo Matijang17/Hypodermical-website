@@ -68,7 +68,7 @@
 }
 /* Transparent over dark hero */
 .main-nav.transparent {
-  background: transparent;
+  background: #000000;
   border-bottom-color: transparent;
   box-shadow: none;
 }
