@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find a Centre — Hypodermical Benelux</title>
+  <meta name="description" content="Hypodermical-certified partner centres across Belgium, the Netherlands and Luxembourg." />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <style>
+    #map { width: 100%; height: 540px; border: 1px solid var(--color-grey-border); }
+    .center-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-grey-border);
+      padding: 1.5rem;
+      transition: border-color var(--transition-fast), transform var(--transition-fast);
+    }
+    .center-card:hover { border-color: var(--color-black); transform: translateY(-2px); }
+    .center-card__city {
+      font-family: var(--font-primary);
+      font-size: 10px; font-weight: var(--fw-bold);
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--color-grey-muted);
+      margin-bottom: 0.5rem;
+    }
+    .center-card__name {
+      font-family: var(--font-display);
+      font-size: 1.5rem; font-weight: var(--fw-bold);
+      line-height: 1.1; margin: 0 0 0.5rem;
+    }
+    .center-card__address {
+      font-family: var(--font-primary);
+      font-size: 0.9rem; color: var(--color-charcoal);
+      line-height: 1.55; margin: 0 0 1rem;
+    }
+    .center-card__cta {
+      font-family: var(--font-primary);
+      font-size: 11px; font-weight: var(--fw-bold);
+      letter-spacing: 0.12em; text-transform: uppercase;
+      text-decoration: none; color: var(--color-black);
+    }
+    .leaflet-popup-content-wrapper {
+      border-radius: 0 !important;
+      border: 1px solid var(--color-black);
+      background: var(--color-white);
+    }
+    .leaflet-popup-content { font-family: var(--font-primary); font-size: 13px; }
+    .hy-marker {
+      width: 32px; height: 32px;
+      background: var(--color-black);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--color-white);
+      font-family: var(--font-primary);
+      font-size: 10px; font-weight: var(--fw-bold);
+      letter-spacing: 0.05em;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+    .search-form {
+      display: flex;
+      gap: 0;
+      max-width: 600px;
+      margin: 2rem auto 0;
+    }
+    .search-form input {
+      flex: 1;
+      padding: 14px 18px;
+      border: 1px solid var(--color-black);
+      border-right: none;
+      font-family: var(--font-primary);
+      font-size: 0.95rem;
+      background: transparent;
+    }
+    .search-form input:focus { outline: none; }
+    .search-form button {
+      padding: 14px 28px;
+      border: 1px solid var(--color-black);
+      background: var(--color-black);
+      color: var(--color-white);
+      font-family: var(--font-primary);
+      font-size: 11px;
+      font-weight: var(--fw-bold);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div data-include="/partials/header.html"></div>
+
+<main>
+
+  <section class="page-hero" aria-labelledby="findcenter-title">
+    <div class="page-hero-inner reveal">
+      <span class="bubble-tag page-hero-eyebrow">Benelux Network</span>
+      <h1 class="page-hero-title" id="findcenter-title">Find a <em>Centre.</em></h1>
+      <p class="page-hero-sub">Hypodermical-certified partner centres across Belgium, the Netherlands, and Luxembourg.</p>
+      <form class="search-form" role="search" onsubmit="event.preventDefault();">
+        <label for="centre-search" class="sr-only">Search by city or postal code</label>
+        <input id="centre-search" type="search" placeholder="City or postal code…" autocomplete="off"/>
+        <button type="submit">Search →</button>
+      </form>
+      <div class="filter-tabs" id="country-filter">
+        <button class="filter-tab active" data-country="all" type="button">All</button>
+        <button class="filter-tab" data-country="be" type="button">Belgium</button>
+        <button class="filter-tab" data-country="nl" type="button">Netherlands</button>
+        <button class="filter-tab" data-country="lu" type="button">Luxembourg</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="section-inner">
+      <div id="map" aria-label="Map of partner centres"></div>
+      <div class="treatment-grid" id="centre-list" style="margin-top:3rem;"></div>
+    </div>
+  </section>
+
+  <section class="cta-strip">
+    <h2 class="cta-strip__title">Is your centre not <em>listed?</em></h2>
+    <p class="cta-strip__sub">Become a certified Hypodermical partner. Request a demo and explore the programme.</p>
+    <div class="cta-strip__actions">
+      <a href="/pages/professionals.html" class="btn btn-white btn-lg">For Professionals</a>
+      <a href="/pages/contact.html" class="btn btn-outline-white btn-lg">Request a Demo</a>
+    </div>
+  </section>
+
+</main>
+
+<div data-include="/partials/footer.html"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="/js/include.js"></script>
+<script src="/js/main.js"></script>
+<script>
+(function initCentres() {
+  const CENTRES = [
+    { id: 1, name: 'Beauty Studio Amsterdam', city: 'Amsterdam',  country: 'nl', address: 'Herengracht 412, 1017 BX Amsterdam', phone: '+31 20 555 0101', lat: 52.366,  lng: 4.892 },
+    { id: 2, name: 'Esthétique Bruxelles',     city: 'Brussels',   country: 'be', address: 'Avenue Louise 320, 1050 Brussels', phone: '+32 2 555 0102',  lat: 50.8505, lng: 4.3488 },
+    { id: 3, name: 'Institut de Beauté Liège', city: 'Liège',      country: 'be', address: 'Rue Saint-Gilles 14, 4000 Liège',  phone: '+32 4 555 0103',  lat: 50.633,  lng: 5.567 },
+    { id: 4, name: 'Skin Clinic Rotterdam',    city: 'Rotterdam',  country: 'nl', address: 'Coolsingel 75, 3012 AD Rotterdam',  phone: '+31 10 555 0104', lat: 51.9244, lng: 4.477  },
+    { id: 5, name: 'Centre Luxembourg',        city: 'Luxembourg', country: 'lu', address: 'Boulevard Royal 18, 2449 Luxembourg', phone: '+352 555 0105',   lat: 49.611,  lng: 6.131 },
+    { id: 6, name: 'Wellness Antwerp',         city: 'Antwerp',    country: 'be', address: 'Meir 50, 2000 Antwerp',              phone: '+32 3 555 0106',  lat: 51.2194, lng: 4.4025 },
+    { id: 7, name: 'The Hague Skin Atelier',   city: 'The Hague',  country: 'nl', address: 'Lange Voorhout 22, 2514 EE The Hague', phone: '+31 70 555 0107', lat: 52.0823, lng: 4.3119 }
+  ];
+
+  const map = L.map('map', { scrollWheelZoom: false, zoomControl: true }).setView([51.0, 5.0], 7);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &middot; CartoDB'
+  }).addTo(map);
+
+  const hyIcon = L.divIcon({
+    className: '',
+    html: '<div class="hy-marker">HY.</div>',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    popupAnchor: [0, -16]
+  });
+
+  const markers = [];
+  const list = document.getElementById('centre-list');
+
+  function renderList(filter) {
+    list.innerHTML = '';
+    const filtered = CENTRES.filter((c) => filter === 'all' || c.country === filter);
+    if (!filtered.length) { list.innerHTML = '<p style="grid-column:1/-1;color:var(--color-grey-muted);text-align:center;">No centres in this region yet.</p>'; return; }
+    filtered.forEach((c) => {
+      const flag = c.country === 'be' ? 'Belgium' : c.country === 'nl' ? 'Netherlands' : 'Luxembourg';
+      list.insertAdjacentHTML('beforeend', `
+        <article class="center-card">
+          <div class="center-card__city">${c.city} · ${flag}</div>
+          <h3 class="center-card__name">${c.name}</h3>
+          <p class="center-card__address">${c.address}<br/><a href="tel:${c.phone.replace(/\s+/g,'')}" style="color:inherit;">${c.phone}</a></p>
+          <a href="#" class="center-card__cta" data-focus-id="${c.id}">View on map <span aria-hidden="true">→</span></a>
+        </article>
+      `);
+    });
+  }
+
+  CENTRES.forEach((c) => {
+    const m = L.marker([c.lat, c.lng], { icon: hyIcon }).addTo(map);
+    m.bindPopup(`<strong>${c.name}</strong><br/>${c.address}<br/><a href="tel:${c.phone.replace(/\s+/g,'')}">${c.phone}</a>`);
+    markers.push({ id: c.id, marker: m, country: c.country });
+  });
+
+  renderList('all');
+
+  document.querySelectorAll('#country-filter [data-country]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const cc = btn.dataset.country;
+      document.querySelectorAll('#country-filter .filter-tab').forEach((b) => b.classList.toggle('active', b === btn));
+      markers.forEach(({ marker, country }) => {
+        if (cc === 'all' || country === cc) marker.addTo(map);
+        else map.removeLayer(marker);
+      });
+      renderList(cc);
+    });
+  });
+
+  // Click "view on map" link in card
+  list.addEventListener('click', (e) => {
+    const link = e.target.closest('[data-focus-id]');
+    if (!link) return;
+    e.preventDefault();
+    const id = +link.getAttribute('data-focus-id');
+    const m = markers.find((x) => x.id === id);
+    if (m) { map.flyTo(m.marker.getLatLng(), 13, { duration: 0.6 }); m.marker.openPopup(); document.getElementById('map').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  });
+})();
+</script>
+</body>
+</html>

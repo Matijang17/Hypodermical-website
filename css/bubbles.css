@@ -1,0 +1,189 @@
+/* ============================================================
+   HYPODERMICAL BUBBLE SYSTEM
+   Brand element: overlapping circle clusters (4–5 circles)
+   Used as decorative dividers, borders, backgrounds, accents
+   ============================================================ */
+
+/* ─── BASE BUBBLE CLUSTER ─────────────────────────────────── */
+.bubble-cluster {
+  position: relative;
+  display: inline-block;
+  width: 120px;
+  height: 100px;
+  color: var(--color-black);
+}
+.bubble-cluster::before,
+.bubble-cluster::after,
+.bubble-cluster .b3,
+.bubble-cluster .b4,
+.bubble-cluster .b5 {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: currentColor;
+}
+.bubble-cluster::before  { width: 52px; height: 52px; top: 10px; right: 0; }
+.bubble-cluster::after   { width: 40px; height: 40px; top: 30px; right: 24px; }
+.bubble-cluster .b3      { width: 44px; height: 44px; top: 0; left: 0; }
+.bubble-cluster .b4      { width: 24px; height: 24px; bottom: 0; left: 10px; }
+.bubble-cluster .b5      { width: 18px; height: 18px; top: 0; left: 42px; }
+
+/* Colour variants */
+.bubble-cluster.black { color: var(--color-black); }
+.bubble-cluster.white { color: var(--color-white); }
+.bubble-cluster.sand  { color: var(--color-sand); }
+
+/* Outline (transparent fill, currentColor border) */
+.bubble-cluster.outline::before,
+.bubble-cluster.outline::after,
+.bubble-cluster.outline .b3,
+.bubble-cluster.outline .b4,
+.bubble-cluster.outline .b5 {
+  background: transparent;
+  border: 1.5px solid currentColor;
+}
+
+/* Size variants */
+.bubble-cluster.sm   { transform: scale(0.5); transform-origin: top left; }
+.bubble-cluster.lg   { transform: scale(1.8); transform-origin: top left; }
+.bubble-cluster.xl   { transform: scale(3.0); transform-origin: top left; }
+.bubble-cluster.hero { transform: scale(5.0); transform-origin: top left; }
+
+/* ─── BUBBLE BORDER — corner rings on cards/sections ─────── */
+.bubble-border {
+  position: relative;
+  overflow: visible;
+}
+.bubble-border::before,
+.bubble-border::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(10, 10, 10, 0.10);
+  pointer-events: none;
+}
+.bubble-border::before {
+  width: 200px; height: 200px;
+  top: -60px; right: -60px;
+}
+.bubble-border::after {
+  width: 120px; height: 120px;
+  top: -10px; right: -10px;
+  border-color: rgba(10, 10, 10, 0.06);
+}
+.bubble-border.left::before  { right: auto; left: -60px; }
+.bubble-border.left::after   { right: auto; left: -10px; }
+.bubble-border.bottom::before { top: auto; bottom: -60px; }
+.bubble-border.bottom::after  { top: auto; bottom: -10px; }
+.bubble-border.light::before,
+.bubble-border.light::after  { border-color: rgba(255, 255, 255, 0.18); }
+
+/* ─── BUBBLE SECTION DIVIDER ──────────────────────────────── */
+.bubble-divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 0;
+}
+.bubble-divider::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 50%;
+  height: 1px;
+  background: var(--color-grey-border);
+}
+.bubble-divider .cluster-wrap {
+  position: relative;
+  z-index: 1;
+  background: var(--color-white);
+  padding: 0 1.5rem;
+}
+
+/* ─── BUBBLE BACKGROUND — large ghost rings ───────────────── */
+.bubble-bg {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(10, 10, 10, 0.06);
+  pointer-events: none;
+  z-index: 0;
+}
+.bubble-bg.light { border-color: rgba(255, 255, 255, 0.10); }
+
+/* ─── BUBBLE TAG (pill) — the only rounded element allowed ─ */
+.bubble-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border: 1px solid var(--color-black);
+  border-radius: 999px;
+  font-family: var(--font-primary);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-black);
+  background: transparent;
+}
+.bubble-tag::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-black);
+  flex-shrink: 0;
+}
+.bubble-tag.white { color: var(--color-white); border-color: var(--color-white); }
+.bubble-tag.white::before { background: var(--color-white); }
+.bubble-tag.filled {
+  background: var(--color-black);
+  color: var(--color-white);
+}
+.bubble-tag.filled::before { background: var(--color-white); }
+
+/* ─── FLOATING BUBBLE — animated atmosphere ───────────────── */
+@keyframes bubble-float {
+  0%   { transform: translateY(0) scale(1);    opacity: 0.06; }
+  50%  { transform: translateY(-18px) scale(1.03); opacity: 0.10; }
+  100% { transform: translateY(0) scale(1);    opacity: 0.06; }
+}
+.bubble-float {
+  position: absolute;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--color-black);
+  pointer-events: none;
+  animation: bubble-float 6s ease-in-out infinite;
+}
+.bubble-float:nth-child(2) { animation-delay: -2s; }
+.bubble-float:nth-child(3) { animation-delay: -4s; }
+.bubble-float.light { border-color: var(--color-white); }
+
+/* ─── BUBBLE CARD IMAGE — concentric ring frame ───────────── */
+.bubble-card-img {
+  position: relative;
+  display: inline-block;
+}
+.bubble-card-img img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+.bubble-card-img::before,
+.bubble-card-img::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.bubble-card-img::before {
+  inset: -8px;
+  border: 1px solid rgba(10, 10, 10, 0.15);
+}
+.bubble-card-img::after {
+  inset: -16px;
+  border: 1px solid rgba(10, 10, 10, 0.07);
+}

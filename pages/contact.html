@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Hypodermical Benelux</title>
+  <meta name="description" content="Talk to Hypodermical Benelux. Request a professional demo, ask about training, or get in touch about partnership." />
+  <link rel="stylesheet" href="/css/main.css" />
+  <style>
+    .contact-split { display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh; }
+    .contact-split__left {
+      background: var(--color-black);
+      color: var(--color-white);
+      padding: calc(var(--total-nav) + 4rem) clamp(2rem,5vw,5rem) 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-split__right {
+      background: var(--color-white);
+      color: var(--color-black);
+      padding: calc(var(--total-nav) + 4rem) clamp(2rem,5vw,5rem) 4rem;
+    }
+    .contact-info { display: flex; flex-direction: column; gap: 1.1rem; margin-top: 2.5rem; }
+    .contact-info__item { display: flex; flex-direction: column; gap: 0.35rem; }
+    .contact-info__label { font-family: var(--font-primary); font-size: 10px; font-weight: var(--fw-bold); letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.6; }
+    .contact-info__value { font-family: var(--font-display); font-size: 1.35rem; font-weight: var(--fw-regular); line-height: 1.3; }
+    .contact-info__value a { color: inherit; text-decoration: none; }
+    .contact-info__value a:hover { text-decoration: underline; }
+    @media (max-width: 900px) { .contact-split { grid-template-columns: 1fr; min-height: auto; } }
+  </style>
+</head>
+<body>
+
+<div data-include="/partials/header.html"></div>
+
+<main>
+
+  <section class="contact-split">
+    <div class="contact-split__left">
+      <span class="bubble-float light" style="width:300px;height:300px;top:-80px;right:-100px" aria-hidden="true"></span>
+      <span class="bubble-float light" style="width:160px;height:160px;bottom:-40px;left:-40px;animation-delay:-2s" aria-hidden="true"></span>
+      <div class="bubble-cluster white lg" style="margin-bottom:2rem;" aria-hidden="true"><span class="b3"></span><span class="b4"></span><span class="b5"></span></div>
+      <span class="bubble-tag white">Get in touch</span>
+      <h1 class="page-hero-title" style="font-size:clamp(2.5rem,5vw,4.5rem);margin:1rem 0 1.5rem;">Let's <em>talk.</em></h1>
+      <p style="font-family:var(--font-primary);font-weight:var(--fw-light);font-size:1rem;line-height:1.65;max-width:42ch;opacity:0.82;">Whether you're a beauty professional, journalist, or curious individual — we'd like to hear from you.</p>
+      <div class="contact-info">
+        <div class="contact-info__item">
+          <span class="contact-info__label">Offices</span>
+          <span class="contact-info__value">Strada G. Cavestro 3/A<br/>43121 Parma · Italy</span>
+        </div>
+        <div class="contact-info__item">
+          <span class="contact-info__label">Phone</span>
+          <span class="contact-info__value"><a href="tel:+390521162749">+39 0521 162 7490</a></span>
+        </div>
+        <div class="contact-info__item">
+          <span class="contact-info__label">WhatsApp</span>
+          <span class="contact-info__value"><a href="https://wa.me/393757356934" target="_blank" rel="noopener">+39 375 7356 934</a></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-split__right">
+      <span class="bubble-tag">Send a message</span>
+      <h2 style="font-family:var(--font-primary);font-weight:var(--fw-extrabold);font-size:1.65rem;letter-spacing:-0.005em;margin:1rem 0 2rem;">We respond within 48 hours.</h2>
+
+      <form class="contact-form" action="#" method="post" novalidate>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="c-name">Name</label>
+            <input type="text" id="c-name" name="name" required autocomplete="name"/>
+          </div>
+          <div class="form-field">
+            <label for="c-org">Salon / Centre Name</label>
+            <input type="text" id="c-org" name="org" autocomplete="organization"/>
+          </div>
+          <div class="form-field">
+            <label for="c-country">Country</label>
+            <select id="c-country" name="country" required>
+              <option value="">Select…</option>
+              <option value="be">Belgium</option>
+              <option value="nl">Netherlands</option>
+              <option value="lu">Luxembourg</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="c-email">Email</label>
+            <input type="email" id="c-email" name="email" required autocomplete="email"/>
+          </div>
+          <div class="form-field">
+            <label for="c-phone">Phone</label>
+            <input type="tel" id="c-phone" name="phone" autocomplete="tel"/>
+          </div>
+          <div class="form-field">
+            <label>I am a…</label>
+            <div class="radio-pills">
+              <label><input type="radio" name="role" value="pro" checked/>Professional</label>
+              <label><input type="radio" name="role" value="individual"/>Individual</label>
+              <label><input type="radio" name="role" value="press"/>Press</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-grid full" style="margin-top:1rem;">
+          <div class="form-field">
+            <label for="c-msg">Message</label>
+            <textarea id="c-msg" name="message" rows="5" required></textarea>
+          </div>
+        </div>
+        <div style="margin-top:1.5rem;">
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">Send Message</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<div data-include="/partials/footer.html"></div>
+
+<script src="/js/include.js"></script>
+<script src="/js/main.js"></script>
+<script>
+  // Radio pill visual toggling (browsers that don't yet support :has())
+  document.querySelectorAll('.radio-pills').forEach((group) => {
+    const update = () => group.querySelectorAll('label').forEach((l) => {
+      l.classList.toggle('is-checked', l.querySelector('input')?.checked);
+    });
+    group.addEventListener('change', update);
+    update();
+  });
+</script>
+</body>
+</html>
