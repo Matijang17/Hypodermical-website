@@ -19,6 +19,25 @@ a { color: inherit; }
 button { font-family: inherit; }
 ul { list-style: none; }
 
+/* ─── Editorial serif headings ──────────────────────────────── */
+h1, h2, h3, h4,
+.hero-title,
+.section-title,
+.pillar-title,
+.card-title,
+.blog-card-title,
+.result-card-title,
+.mega-col-title {
+  font-family: var(--font-display);
+  font-weight: var(--fw-regular);
+  letter-spacing: -0.01em;
+}
+.hero-title { font-weight: var(--fw-light); }
+.section-title { font-weight: var(--fw-regular); }
+.hero-title em { font-style: italic; font-weight: var(--fw-light); }
+/* Restore sans for the all-caps eyebrow column titles in mega menu */
+.mega-col-title { font-family: var(--font-primary); font-weight: var(--fw-bold); letter-spacing: 0.14em; }
+
 /* ─── Header ────────────────────────────────────────────────── */
 .site-header {
   position: sticky;

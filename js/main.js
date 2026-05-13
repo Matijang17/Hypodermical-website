@@ -21,45 +21,54 @@ window.addEventListener('scroll', () => {
   lastScroll = scrollY;
 }, { passive: true });
 
-/* ─── Mega menu (hover + click) ──────────────────────────────── */
-const treatmentsTrigger = document.getElementById('treatments-trigger');
-const treatmentsLink    = document.getElementById('treatments-link');
+/* ─── Mega menus (hover + click) ─────────────────────────────── */
+const megaTriggers = document.querySelectorAll('.has-mega');
 
-if (treatmentsTrigger) {
+megaTriggers.forEach((trigger) => {
+  const link = trigger.querySelector(':scope > a');
+  if (!link) return;
   let closeTimer = null;
 
-  function openMega() {
+  const closeAll = (except) => {
+    megaTriggers.forEach((other) => {
+      if (other === except) return;
+      other.classList.remove('open');
+      const otherLink = other.querySelector(':scope > a');
+      otherLink?.setAttribute('aria-expanded', 'false');
+    });
+  };
+  const open = () => {
     clearTimeout(closeTimer);
-    treatmentsTrigger.classList.add('open');
-    treatmentsLink.setAttribute('aria-expanded', 'true');
-  }
-  function closeMega() {
+    closeAll(trigger);
+    trigger.classList.add('open');
+    link.setAttribute('aria-expanded', 'true');
+  };
+  const close = () => {
     closeTimer = setTimeout(() => {
-      treatmentsTrigger.classList.remove('open');
-      treatmentsLink.setAttribute('aria-expanded', 'false');
+      trigger.classList.remove('open');
+      link.setAttribute('aria-expanded', 'false');
     }, 120);
-  }
+  };
 
-  treatmentsTrigger.addEventListener('mouseenter', openMega);
-  treatmentsTrigger.addEventListener('mouseleave', closeMega);
+  trigger.addEventListener('mouseenter', open);
+  trigger.addEventListener('mouseleave', close);
 
-  treatmentsLink.addEventListener('click', (e) => {
+  link.addEventListener('click', (e) => {
     const isMobile = window.innerWidth < 768;
     if (isMobile) {
       e.preventDefault();
-      treatmentsTrigger.classList.toggle('open');
-      const expanded = treatmentsTrigger.classList.contains('open');
-      treatmentsLink.setAttribute('aria-expanded', String(expanded));
+      const willOpen = !trigger.classList.contains('open');
+      if (willOpen) open(); else close();
     }
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeMega();
+    if (e.key === 'Escape') close();
   });
   document.addEventListener('click', (e) => {
-    if (!treatmentsTrigger.contains(e.target)) closeMega();
+    if (!trigger.contains(e.target)) close();
   });
-}
+});
 
 /* ─── Hamburger / mobile menu ────────────────────────────────── */
 const hamburger  = document.getElementById('hamburger');
