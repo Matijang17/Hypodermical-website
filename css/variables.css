@@ -1,59 +1,73 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Bodoni+Moda:ital,wght@0,400;0,500;0,700;0,800;1,400;1,700&family=Anton&display=swap');
 
 :root {
-  /* Spec palette — luxury medical-aesthetic */
-  --color-ivory:        #FAF8F5;
+  /* ─── BRAND PALETTE (fixed — from brand guide) ─── */
+  --color-black:        #0A0A0A;   /* dominant for headings, CTA, dark sections */
+  --color-charcoal:     #333333;   /* dark graphite — body text on light bg */
+  --color-sand:         #D9D0C7;   /* warm greige — primary brand neutral */
+  --color-light-grey:   #E8EAF0;   /* cool pale silver — section fills */
   --color-white:        #FFFFFF;
-  --color-charcoal:     #1C1C1C;
-  --color-dark:         #0D0D0D;
-  --color-gold:         #C9A96E;
-  --color-gold-light:   #E8D4A8;
-  --color-muted:        #6B6B6B;
-  --color-border:       #E8E2D9;
-  --color-surface:      #F2EDE6;
-  --color-black:        #000000;
+  --color-grey-muted:   #888888;   /* labels, eyebrow text, inactive */
+  --color-grey-border:  #E0E0E0;   /* dividers, card borders */
 
-  /* Legacy aliases — remapped to spec equivalents so existing CSS keeps working */
-  --color-bg:           var(--color-ivory);
-  --color-nude:         var(--color-gold);
-  --color-nude-light:   var(--color-gold-light);
-  --color-nude-dark:    var(--color-gold);
-  --color-silver:       var(--color-border);
-  --color-silver-light: var(--color-surface);
-  --color-face:         var(--color-gold);
-  --color-body:         var(--color-gold-light);
-  --color-wellness:     var(--color-charcoal);
+  /* Accent colours — used sparingly, never as page backgrounds */
+  --color-slate:        #4A5550;
+  --color-sage:         #7FAD9A;
+  --color-cobalt:       #2B3BB5;
+  --color-amber:        #C97B2B;
+  --color-red-vial:     #C0352A;
+  --color-yellow-vial:  #E8C840;
 
-  /* Typography — editorial serif + clean sans */
-  --font-display:  'Cormorant Garamond', 'Times New Roman', serif;
-  --font-primary:  'DM Sans', system-ui, -apple-system, sans-serif;
-  --font-accent:   'DM Sans', system-ui, sans-serif;
+  /* ─── LEGACY ALIASES (remapped — existing CSS keeps working) ─── */
+  --color-bg:           var(--color-white);
+  --color-ivory:        var(--color-white);
+  --color-dark:         var(--color-black);
+  --color-muted:        var(--color-grey-muted);
+  --color-border:       var(--color-grey-border);
+  --color-surface:      var(--color-light-grey);
+  --color-gold:         var(--color-black);
+  --color-gold-light:   var(--color-charcoal);
+  --color-nude:         var(--color-sand);
+  --color-nude-light:   var(--color-light-grey);
+  --color-nude-dark:    var(--color-charcoal);
+  --color-silver:       var(--color-grey-border);
+  --color-silver-light: var(--color-light-grey);
+  --color-face:         var(--color-charcoal);
+  --color-body:         var(--color-sand);
+  --color-wellness:     var(--color-slate);
+
+  /* ─── TYPOGRAPHY ─── */
+  --font-primary:  'Montserrat', system-ui, -apple-system, sans-serif;       /* UI, body, nav, buttons */
+  --font-display:  'Bodoni Moda', 'Times New Roman', serif;                  /* editorial hero / section titles */
+  --font-accent:   'Anton', 'Impact', 'Haettenschweiler', sans-serif;        /* callout stats, marquee */
 
   --fw-light: 300;
   --fw-regular: 400;
   --fw-medium: 500;
   --fw-semibold: 600;
   --fw-bold: 700;
-  --fw-extrabold: 700;
+  --fw-extrabold: 800;
 
   --nav-height: 72px;
   --utility-height: 40px;
   --total-nav: calc(var(--nav-height) + var(--utility-height));
 
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 16px;
-  --radius-pill: 999px;
+  /* SHARP CORNERS — brand rule */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-pill: 999px;   /* allowed only for badges/pills, not buttons or cards */
 
-  --shadow-sm: 0 2px 8px rgba(28,28,28,0.05);
-  --shadow-md: 0 8px 32px rgba(28,28,28,0.08);
-  --shadow-lg: 0 24px 64px rgba(28,28,28,0.12);
+  /* No drop shadows on cards — use borders. Shadows reserved for floating overlays. */
+  --shadow-sm: 0 1px 2px rgba(10,10,10,0.04);
+  --shadow-md: 0 8px 32px rgba(10,10,10,0.10);
+  --shadow-lg: 0 24px 64px rgba(10,10,10,0.18);
 
   --transition-fast: 200ms ease;
   --transition-base: 350ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 600ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  --max-width: 1280px;
+  --max-width: 1440px;
   --section-px: clamp(1.5rem, 5vw, 5rem);
-  --section-py: clamp(4rem, 8vw, 8rem);
+  --section-py: clamp(5rem, 10vw, 10rem);
 }

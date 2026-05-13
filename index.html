@@ -295,55 +295,46 @@
 
 <main>
 
-  <!-- HERO -->
+  <!-- HERO — editorial campaign poster -->
   <section class="hero" aria-labelledby="hero-title">
-    <img src="assets/images/hypodermical-bubbles-animated.svg" alt="" aria-hidden="true" class="bg-bubble-img bg-bubble-img--tr"/>
-    <img src="assets/images/hypodermical-bubbles-animated.svg" alt="" aria-hidden="true" class="bg-bubble-img bg-bubble-img--bl"/>
-    <div class="hero-content">
-      <p class="hero-eyebrow reveal">Hypodermical Benelux</p>
-      <h1 class="hero-title reveal reveal-delay-1" id="hero-title">Unlock<br>Your <em>Beauty.</em></h1>
-      <p class="hero-subtitle reveal reveal-delay-2">The first skin regeneration method based on 16 biological markers of aging. No needles. Just science, serum, and results you can see.</p>
-      <div class="hero-actions reveal reveal-delay-3">
-        <a href="/pages/treatments.html" class="btn btn-primary btn-lg">Discover Treatments</a>
-        <a href="/pages/find-a-center.html" class="btn btn-outline btn-lg">Find a Center</a>
-      </div>
-      <div class="hero-trust reveal reveal-delay-4">
-        <div class="hero-trust-item">
-          <div class="hero-trust-num">90+</div>
-          <div class="hero-trust-label">Protocols</div>
-        </div>
-        <div class="hero-trust-sep" aria-hidden="true"></div>
-        <div class="hero-trust-item">
-          <div class="hero-trust-num">16</div>
-          <div class="hero-trust-label">Biomarkers</div>
-        </div>
-        <div class="hero-trust-sep" aria-hidden="true"></div>
-        <div class="hero-trust-item">
-          <div class="hero-trust-num">0</div>
-          <div class="hero-trust-label">Needles</div>
-        </div>
-      </div>
+    <div class="hero-bg" aria-hidden="true">
+      <picture>
+        <source media="(min-width: 1280px)" srcset="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=2000&q=85&auto=format&fit=crop"/>
+        <source media="(min-width: 768px)" srcset="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1400&q=85&auto=format&fit=crop"/>
+        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=900&q=85&auto=format&fit=crop" alt="" class="hero-bg-img" loading="eager" fetchpriority="high"/>
+      </picture>
+      <div class="hero-bg-tint"></div>
+      <div class="hero-bg-vignette"></div>
     </div>
-    <div class="hero-visual" aria-hidden="true">
-      <div class="hero-img-wrap">
-        <div class="hero-img-bubble">
-          <img src="/assets/images/Progetto-senza-titolo.webp" alt="Elegant skin treatment" loading="eager" width="520" height="572"/>
-        </div>
-        <div class="hero-floating-badge badge-top">
-          <div class="badge-icon">🧬</div>
-          <div>
-            <div class="badge-label">Science-backed</div>
-            <div class="badge-value">16 Biomarkers</div>
-          </div>
-        </div>
-        <div class="hero-floating-badge badge-bottom">
-          <div class="badge-icon">✦</div>
-          <div>
-            <div class="badge-label">Needle-free</div>
-            <div class="badge-value">100% Natural</div>
-          </div>
+
+    <!-- Editorial poster frame: corner labels + center title + bottom callouts -->
+    <div class="hero-frame">
+      <div class="hero-corner hero-corner--tl reveal">
+        <span class="hero-corner-dot" aria-hidden="true"></span>
+        <span>Unlock your beauty</span>
+      </div>
+      <div class="hero-corner hero-corner--tr reveal reveal-delay-1">
+        <span>Discover Hypodermical</span>
+        <span class="hero-corner-arrow" aria-hidden="true">→</span>
+      </div>
+
+      <div class="hero-content">
+        <p class="hero-eyebrow reveal reveal-delay-1">Hypodermical Benelux &middot; The Method</p>
+        <h1 class="hero-title reveal reveal-delay-2" id="hero-title">Unlock<br/>Your <em>Beauty.</em></h1>
+        <p class="hero-subtitle reveal reveal-delay-3">The first professional aesthetic method based on 16 biological markers of ageing. No needles. Visible results from session one.</p>
+        <div class="hero-actions reveal reveal-delay-4">
+          <a href="/pages/contact.html" class="btn btn-white btn-lg">Request a Demo</a>
+          <a href="/pages/method.html" class="btn btn-outline-white btn-lg">Discover the Method</a>
         </div>
       </div>
+
+      <div class="hero-stat reveal reveal-delay-3" aria-hidden="false">
+        <span class="hero-stat-num callout-num">16</span>
+        <span class="hero-stat-rule" aria-hidden="true"></span>
+        <span class="hero-stat-label">Biological<br/>markers of<br/>skin ageing</span>
+      </div>
+
+      <div class="hero-wordmark reveal reveal-delay-4" aria-hidden="true">hypodermical.</div>
     </div>
   </section>
 
